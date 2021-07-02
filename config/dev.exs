@@ -6,6 +6,7 @@ config :humi_cafe, HumiCafe.Repo,
   password: "postgres",
   database: "humi_cafe_dev",
   hostname: "localhost",
+  port: System.get_env("POSTGRES_PORT"),
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
@@ -16,7 +17,7 @@ config :humi_cafe, HumiCafe.Repo,
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
 config :humi_cafe, HumiCafeWeb.Endpoint,
-  http: [port: 4000],
+  http: [port: System.get_env("PHOENIX_PORT") || 4000],
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
