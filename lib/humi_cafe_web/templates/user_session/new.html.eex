@@ -1,27 +1,36 @@
-<h1>Log in</h1>
-
-<%= form_for @conn, Routes.user_session_path(@conn, :create), [as: :user], fn f -> %>
-  <%= if @error_message do %>
-    <div class="alert alert-danger">
-      <p><%= @error_message %></p>
-    </div>
-  <% end %>
-
-  <%= label f, :email %>
-  <%= email_input f, :email, required: true %>
-
-  <%= label f, :password %>
-  <%= password_input f, :password, required: true %>
-
-  <%= label f, :remember_me, "Keep me logged in for 60 days" %>
-  <%= checkbox f, :remember_me %>
-
-  <div>
-    <%= submit "Log in" %>
+<!-- This example requires Tailwind CSS v2.0+ -->
+<div class="max-w-md mx-auto bg-blue-800 overflow-hidden shadow rounded-lg divide-y divide-gray-200">
+  <div class="px-4 py-5 sm:px-6">
+    <h1 class="text-center text-3xl font-extrabold text-white">Log In</h1>
   </div>
-<% end %>
+  <div class="bg-white px-4 py-5 sm:p-6">
+    <%= form_for @conn, Routes.user_session_path(@conn, :create), [as: :user], fn f -> %>
+      <%= if @error_message do %>
+        <div class="error alert alert-danger">
+          <p><%= @error_message %></p>
+        </div>
+      <% end %>
 
-<p>
-  <%= link "Register", to: Routes.user_registration_path(@conn, :new) %> |
-  <%= link "Forgot your password?", to: Routes.user_reset_password_path(@conn, :new) %>
-</p>
+      <%= label f, :email, class: "form-label" %>
+      <%= email_input f, :email, required: true, class: "form-field" %>
+      <%= error_tag f, :email%>
+
+      <%= label f, :password, class: "form-label" %>
+      <%= password_input f, :password, required: true, class: "form-field" %>
+      <%= error_tag f, :password %>
+
+      <%= label f, :remember_me, "Keep me logged in for 60 days" %>
+      <%= checkbox f, :remember_me %>
+
+
+      <div class="pt-5">
+        <%= submit "Log In", class: "btn-blue" %>
+      </div>
+    <% end %>
+
+    <p>
+      <%= link "Register", to: Routes.user_registration_path(@conn, :new) %> |
+      <%= link "Forgot your password?", to: Routes.user_reset_password_path(@conn, :new) %>
+    </p>
+  </div>
+</div>
